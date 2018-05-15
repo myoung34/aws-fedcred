@@ -168,4 +168,4 @@ def write_credentials(profile, creds):
 
     with open(aws_creds_path, 'w') as configfile:
         config.write(configfile)
-    print('Crentials successfully written to %s' % (aws_creds_path,))
+    print('Credentials successfully written to %s' % (aws_creds_path))
