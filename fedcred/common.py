@@ -138,9 +138,7 @@ def write_credentials(profile, creds):
     creds_folder = os.path.dirname(aws_creds_path)
     if not os.path.isdir(creds_folder):
         os.makedirs(creds_folder)
-    if os.path.isfile(aws_creds_path):
-        config.read(aws_creds_path)
-    if not config.has_section(profile):
+    if not config.has_section(profile) or not os.path.isfile(aws_creds_path):
         if profile == 'default':
             configparser.DEFAULTSECT = profile
             if sys.version_info.major == 3:
@@ -149,6 +147,9 @@ def write_credentials(profile, creds):
             config.remove_option(profile, 'CREATE')
         else:
             config.add_section(profile)
+        with open(aws_creds_path, 'w') as configfile:
+            config.write(configfile)
+    config.read(aws_creds_path)
 
     options = [
         ('aws_access_key_id', 'AccessKeyId'),
