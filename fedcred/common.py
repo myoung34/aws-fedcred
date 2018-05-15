@@ -169,3 +169,6 @@ def write_credentials(profile, creds):
     with open(aws_creds_path, 'w') as configfile:
         config.write(configfile)
     print('Credentials successfully written to %s' % (aws_creds_path))
+    if not os.environ.get('AWS_PROFILE', os.environ.get('AWS_DEFAULT_PROFILE', None)):
+        print('To make this work by default, run "export AWS_DEFAULT_PROFILE={}"'.format(profile))
+

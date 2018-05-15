@@ -17,6 +17,9 @@ class Adfs(object):
         try:
             self.sslverification = self.config.getboolean(
                 common.DEFAULT_CONFIG_SECTION, 'sslverify')
+            if not self.sslverification:
+                from requests.packages.urllib3.exceptions import InsecureRequestWarning
+                requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
             self.idpurl = self.config.get('adfs', 'url')
             self.domain = self.config.get('adfs', 'domain')
             try:
