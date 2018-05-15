@@ -32,7 +32,7 @@ class Adfs(object):
         session = requests.Session()
         try:
             if self.domain:
-                username = '{}/{}'.format(self.domain, username)
+                username = '{}\{}'.format(self.domain, username)
             if self.ntlmauth:
                 form_response = session.get(self.idpurl,
                                             verify=self.sslverification,
