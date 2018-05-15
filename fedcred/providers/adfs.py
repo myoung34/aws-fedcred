@@ -18,6 +18,7 @@ class Adfs(object):
             self.sslverification = self.config.getboolean(
                 common.DEFAULT_CONFIG_SECTION, 'sslverify')
             self.idpurl = self.config.get('adfs', 'url')
+            self.domain = self.config.get('adfs', 'domain')
             try:
                 self.ntlmauth = self.config.getboolean('adfs', 'ntlmauth')
             except ValueError:
@@ -30,6 +31,8 @@ class Adfs(object):
 
         session = requests.Session()
         try:
+            if self.domain:
+                username = '{}/{}'.format(self.domain, username)
             if self.ntlmauth:
                 form_response = session.get(self.idpurl,
                                             verify=self.sslverification,
