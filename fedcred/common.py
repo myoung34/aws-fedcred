@@ -50,12 +50,12 @@ def read_config():
 
 def get_user_credentials(prompt=None):
     if prompt is None:
-        prompt_msg = 'Enter you username: '
+        prompt_msg = 'Username: '
     try:
         username = raw_input(prompt_msg).strip()
     except NameError:
         username = input(prompt_msg).strip()
-    password = getpass.getpass(prompt='Enter your password: ')
+    password = getpass.getpass(prompt='Password: ')
     return username, password
 
 
