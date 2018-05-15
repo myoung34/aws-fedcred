@@ -70,15 +70,12 @@ class Adfs(object):
             assertion = common.get_saml_assertion(response)
             arn_to_assume = common.get_arns_from_assertion(assertion)
             sts_creds = common.get_sts_creds(arn_to_assume)
-            try:
-                common.write_credentials(
-                    self.config.get(
-                        common.DEFAULT_CONFIG_SECTION,
-                        'aws_credential_profile'
-                    ),
-                    sts_creds
-                    )
-            except (NoOptionError, NoSectionError) as e:
-                sys.exit(e.message)
+            common.write_credentials(
+                self.config.get(
+                    common.DEFAULT_CONFIG_SECTION,
+                    'aws_credential_profile'
+                ),
+                sts_creds
+                )
         except requests.exceptions.ConnectionError as e:
             sys.exit('Could not connect to %s. %s' % (self.idpurl, e))
