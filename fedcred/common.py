@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 
 
 DEFAULT_CONFIG_SECTION = 'fedcred'
-DEFAULT_CONFIG_FILE = 'fedcred.config'
+DEFAULT_CONFIG_FILE = '.aws/fedcred.config'
 
 
 def read_config():
